@@ -3,6 +3,8 @@
 Install
 
 ```bash
+git clone git@github.com:MaansAndersson/torchlr.git
+cd torchlr
 python3 -m pip install .
 ```
 
