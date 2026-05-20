@@ -63,8 +63,8 @@ class PoissonProblem():
         self.hx = x[1] - x[0]
         self.hy = y[1] - y[0]
         
-        j1 = torch.arange(1, n1 + 1)
-        j2 = torch.arange(1, n2 + 1)
+        j1 = torch.arange(1, n1 + 1, device = DEVICE)
+        j2 = torch.arange(1, n2 + 1, device = DEVICE)
         lx = -2 * (1 - torch.cos(torch.pi * j1 / (n1 + 1)))
         ly = -2 * (1 - torch.cos(torch.pi * j2 / (n2 + 1)))
         self.lx = lx/self.hx**2
