@@ -23,7 +23,7 @@ For usage use `--help`.
 python3 examples/advection_diffusion.py --help 
 
 
-usage: low-rank advection diffusion solver [-h] [-n ELEMENTS] [-is INDEXSELECTION] [-t ENDTIME] [-pf PLOTFREQ] [-f FILENAME] [-s SEED]
+usage: low-rank advection diffusion solver [-h] [-n PROBLEMSIZE] [-is INDEXSELECTION] [-t ENDTIME] [-pf PLOTFREQ] [-f FILENAME] [-s SEED]
 
 ```
 

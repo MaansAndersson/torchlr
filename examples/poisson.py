@@ -144,13 +144,13 @@ if __name__ == '__main__':
                     prog='low-rank advection diffusion solver',
                     description='What the program does',
                     epilog='Text at the bottom of help')
-    parser.add_argument('-n', '--elements')
+    parser.add_argument('-n', '--problemsize')
     parser.add_argument('-is','--indexselection')
     parser.add_argument('-s','--seed')
     parser.add_argument('-log', '--logfile', choices=['timing','solver',None])
     #parser.add_argument('-w','--warmup')
 
-    parser.set_defaults(elements = 1000,
+    parser.set_defaults(problemsize = 1000,
                         indexselection = 'deim',
                         seed = 1,
                         logfile = None)
@@ -159,7 +159,7 @@ if __name__ == '__main__':
     # ---- warmup comment out if needed ------
     print("warmup: ")
     torch.manual_seed(int(args.seed))
-    P = PoissonProblem(n = int(args.elements),
+    P = PoissonProblem(n = int(args.problemsize),
                 indexselection = args.indexselection)
 
     _, _, _ = P.solve()

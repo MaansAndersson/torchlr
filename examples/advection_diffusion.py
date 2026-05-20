@@ -217,14 +217,14 @@ if __name__ == '__main__':
                     prog='low-rank advection diffusion solver',
                     description='This program solves a low-rank advection diffusion problem.',
                     epilog='Thank you!')
-    parser.add_argument('-n', '--elements')
+    parser.add_argument('-n', '--problemsize')
     parser.add_argument('-is','--indexselection')
     parser.add_argument('-t', '--endtime')
     parser.add_argument('-pf', '--plotfreq')
     parser.add_argument('-f', '--filename')
     parser.add_argument('-s','--seed')
 
-    parser.set_defaults(elements = 1024,
+    parser.set_defaults(problemsize = 1024,
                         indexselection = 'deim',
                         endtime = 200,
                         plotfreq = 100,
@@ -236,7 +236,7 @@ if __name__ == '__main__':
     
     torch.manual_seed(int(args.seed))
 
-    main(n = int(args.elements),
+    main(n = int(args.problemsize),
          index_selection_var = args.indexselection,
          tend = float(args.endtime),
          plotfreq = int(args.plotfreq),
