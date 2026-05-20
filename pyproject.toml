@@ -1,0 +1,26 @@
+[build-system]
+requires = ["uv_build >= 0.11.7, <0.12.0"]
+build-backend = "uv_build"
+
+#[tool.uv]
+#managed = false
+
+[project]
+name = "torchlr"
+version = "0.0.1"
+authors = [
+  { name="Måns Andersson", email="mansande@vt.edu" },
+	{ name="Daniel Appelö" , email="appelo@vt.edu"},
+]
+description = "A small lr package"
+readme = "README.md"
+requires-python = ">=3.11"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "torch>=2.8.0",
+		"jax>=0.9.0",
+		"matplotlib",
+]
