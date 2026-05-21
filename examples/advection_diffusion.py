@@ -118,11 +118,11 @@ def grhside(I, J, U, S, V, hi, hj, dt, nu, x, y):
 # Main
 # ---------------------------------------------------------------------------
 
-def main(n = 1000, 
-         tend = 2.0,
-         index_selection_var = 'deim',
-         filename = None,
-         plotfreq = 100):
+def main(n,
+         tend,
+         index_selection_var,
+         filename,
+         plotfreq):
     # ---- parameters ----
 
     CFL  = 0.5
@@ -226,7 +226,7 @@ if __name__ == '__main__':
 
     parser.set_defaults(problemsize = 1024,
                         indexselection = 'deim',
-                        endtime = 200,
+                        endtime = 2,
                         plotfreq = 100,
                         filename = "ad_fig",
                         logfile = None,
