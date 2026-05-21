@@ -4,8 +4,6 @@ Simplify interface or remove.
 """
 
 import torch
-import numpy
-import time
 
 @torch.compile
 def qr_(A, pivoting=False, full_matrices=False):

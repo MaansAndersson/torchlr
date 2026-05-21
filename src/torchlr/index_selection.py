@@ -8,8 +8,6 @@ import torch
 import jax
 
 
-from . import linalg #qr_
-
 # Torch
 @torch.compile(dynamic=True)
 def deim(U, I):
