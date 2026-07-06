@@ -5,7 +5,7 @@ Install
 ```bash
 git clone git@github.com:MaansAndersson/torchlr.git
 cd torchlr
-python3 -m pip install .
+python3 -m pip install -e .
 ```
 
 It can be advantageous to install in a [`venv`](https://docs.python.org/3/library/venv.html).
@@ -37,7 +37,7 @@ DTYPE  = torch.float64
 We assume that if there is a `cuda` device available then we want it to be used.
 
 
-## Clear cache 
+## Clear cache
 At some point the cached functions might need to be removed
 ```
 rm -rf /tmp/torchinductor_$(whoami)
