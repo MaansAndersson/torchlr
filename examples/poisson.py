@@ -109,7 +109,8 @@ class PoissonProblem():
         small_grhside = lambda i, j : grhside(i, j, UF, self.SF, VF, self.hx, self.hy, self.lx, self.ly, DEVICE)
         
         [U, S, V, solver_data, cross_iter] = crossDEIM(small_grhside, UF, self.SF, VF, self.opts)
-        
+        self.U = U
+
         tcrossdeim = time.perf_counter() - t0
         print("cross time: ", tcrossdeim)
         
@@ -148,12 +149,14 @@ if __name__ == '__main__':
     parser.add_argument('-is','--indexselection')
     parser.add_argument('-s','--seed')
     parser.add_argument('-log', '--logfile', choices=['timing','solver',None])
+    parser.add_argument('-hw','--hardware')
     #parser.add_argument('-w','--warmup')
 
     parser.set_defaults(problemsize = 1000,
                         indexselection = 'deim',
                         seed = 1,
-                        logfile = None)
+                        logfile = None,
+                        hardware = "Unknown")
     args = parser.parse_args()
 
     # ---- warmup comment out if needed ------
@@ -173,7 +176,7 @@ if __name__ == '__main__':
     #with profiler.profile(activities=[profiler.ProfilerActivity.CUDA], acc_events=True) as prof: #, with_stack=True, profile_memory=True) as prof:
     total_time, solver_data, cross_iter = P.solve()
 
-    print("total time: ",total_time)
+    print("total time: ", total_time)
     #print(prof.key_averages(group_by_stack_n=10).table(sort_by=str(DEVICE)+"_time_total", row_limit=10))
 
 
@@ -184,9 +187,9 @@ if __name__ == '__main__':
 
         with open(logfile,'a') as file:
             if args.logfile == "timing":
-                headers = "problem size,time,index selection,device,corss-iter,final_rank,sresidual,seed"
+                headers = "problem size,time,index selection,device,corss-iter,final_rank,residual,seed,system"
                 writer = csv.writer(file)
-                data = [str(int(args.elements)**2),str(total_time),args.indexselection,str(DEVICE),cross_iter,int(solver_data[-1,2]),solver_data[-1,1],args.seed]
+                data = [str(int(args.problemsize)**2),str(total_time),args.indexselection,str(DEVICE),cross_iter,int(P.U.shape[1]),solver_data[-1,1],args.seed,args.hardware]
                 writer.writerow(data)
             elif args.logfile == "solver":
                 headers = "iter_idx, Error, Rank, Ilen, Jlen, LenI, LenJ, Time [s]"
