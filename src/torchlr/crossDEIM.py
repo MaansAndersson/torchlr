@@ -13,7 +13,7 @@ import torch
 from torchlr.scross import scross
 from torchlr import index_selection
 from torchlr.compute_residual import compute_residual
-
+from time import perf_counter
 
 @torch.compile(dynamic=True)
 def crossDEIM(
@@ -76,7 +76,7 @@ def crossDEIM(
 
     Uold = U; Vold = V; Sold = S
     for iter_idx in range(max_iter):
-
+        t0 = perf_counter()
         if index_selection_method == "qdeim":
             I = index_selection.qdeim(U)
             J = index_selection.qdeim(V)
@@ -112,7 +112,7 @@ def crossDEIM(
         solver_data[iter_idx, 4] = Jlen
         solver_data[iter_idx, 5] = len(I)
         solver_data[iter_idx, 6] = len(J)
-        solver_data[iter_idx, 7] = float('nan')
+        solver_data[iter_idx, 7] = perf_counter() - t0 #float('nan')
 
         if resid < tolRES and min(eta1 * (1 + eta2), eta2 * (1 + eta1)) * S[-1] < tolLR:
             break
@@ -153,14 +153,14 @@ def xdeim_step(
 
     # When using DEIM ensure at least one extra index is sampled to avoid
     # empty sample sets in early iterations.
-    if (index_selection_method in ("qdeim", "deim") and len(I0) == len(I)) or iter_idx == 0:
+    if (index_selection_method in ("qdeim", "deim", "ls") and len(I0) == len(I)) or iter_idx == 0:
         Iadd = Iall[~torch.isin(Iall, I)]
         if len(Iadd) > 0:
             Iadd_perm = torch.randperm(len(Iadd), device=U.device)
             Iadd_idx = Iadd_perm[:min(1, len(Iadd))]
             I = torch.cat([I, Iadd[Iadd_idx]])
 
-    if (index_selection_method in ("qdeim", "deim") and len(J0) == len(J)) or iter_idx == 0:
+    if (index_selection_method in ("qdeim", "deim", "ls") and len(J0) == len(J)) or iter_idx == 0:
         Jadd = Jall[~torch.isin(Jall, J)]
         if len(Jadd) > 0:
             Jadd_perm = torch.randperm(len(Jadd), device=V.device)
