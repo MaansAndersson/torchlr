@@ -134,7 +134,7 @@ class PoissonProblem():
         #ax1.set_zlabel('U')
         #ax1.set_title('')
         
-        plt.savefig('Poisson.png')
+        #plt.savefig('Poisson.png')
 
         return tdst+tcrossdeim+tdst2, solver_data, cross_iter
 
