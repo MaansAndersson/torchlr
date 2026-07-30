@@ -124,14 +124,14 @@ class PoissonProblem():
         print("dst2 time: ", tdst2)
         
         # Rematerialise solution
-        B = U@torch.diag(S)@V.T
-        
-        fig = plt.figure()
-        ax1 = fig.add_subplot(projection='3d')
-        ax1.plot_surface(self.xx.cpu().numpy(), self.yy.cpu().numpy(), B.cpu().numpy())
-        ax1.set_xlabel('x')
-        ax1.set_ylabel('y')
-        ax1.set_zlabel('U')
+        #B = U@torch.diag(S)@V.T
+        #
+        #fig = plt.figure()
+        #ax1 = fig.add_subplot(projection='3d')
+        #ax1.plot_surface(self.xx.cpu().numpy(), self.yy.cpu().numpy(), B.cpu().numpy())
+        #ax1.set_xlabel('x')
+        #ax1.set_ylabel('y')
+        #ax1.set_zlabel('U')
         #ax1.set_title('')
         
         plt.savefig('Poisson.png')
