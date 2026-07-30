@@ -43,7 +43,7 @@ def qdeim(U: torch.Tensor) -> torch.Tensor:
     return S
 
 
-@torch.compile(dynamic=True)
+@torch.compiler.disable #(dynamic=True)
 def leverage_score(U: torch.Tensor, p: torch.Tensor, eps: float = 1e-10) -> torch.Tensor:
     """Sample indices by a simple leverage-score heuristic.
 

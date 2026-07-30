@@ -16,7 +16,7 @@ import torch
 from .linalg import qr_
 
 
-@torch.compile
+@torch.compile(dynamic=True)
 def compute_residual(Ui: List[torch.Tensor], Si: List[torch.Tensor], Vi: List[torch.Tensor]) -> torch.Tensor:
     """Compute a single scalar residual from lists of low-rank factors.
 
