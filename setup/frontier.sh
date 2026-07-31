@@ -14,7 +14,7 @@ source .venv/bin/activate
 
 module load PrgEnv-gnu/8.7.0
 module load cpe/26.03
-module load miniforge3/23.11.0-0
+#module load miniforge3/23.11.0-0
 module load rocm/7.1.1
 module load craype-accel-amd-gfx90a
 
